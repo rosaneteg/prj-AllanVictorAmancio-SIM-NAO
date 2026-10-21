@@ -1,0 +1,130 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+
+    background: linear-gradient(135deg,
+            #bfe8fb,
+            #d9c7f7,
+            #ffd6e8,
+            #fff1c1);
+
+    background-size: 400% 400%;
+    animation: fundo 5s ease infinite;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -280px; /* mais alta que a tela, para o loop não mostrar emenda */
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, hsla(0, 100%, 65%, 0.75) 0 12px, transparent 13px),
+    radial-gradient(circle, hsla(180, 100%, 65%, 0.65) 0 24px, transparent 25px);
+  background-size: 140px 140px, 280px 280px;
+  background-position: 0 0, 70px 90px;
+  will-change: transform, filter;
+  animation:
+    subir 25s linear infinite,
+    arco-iris 4s linear infinite;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+button {
+    width: 150px;
+    height: 80px;
+    font-size: 50px;
+    border-radius: 5%;
+    cursor: pointer;
+}
+
+.button {
+    display: flex;
+    gap: 100px;
+}
+
+.button-sim button {
+    background-color: rgb(104, 230, 102);
+}
+
+.button-sim {
+    position: relative;
+}
+
+.button-nao button {
+    background-color: rgb(215, 83, 83);
+
+}
+
+.explodir {
+    animation: explosao 0.3s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes explosao {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(1);
+    }
+
+    40% {
+        transform: scale(1.4);
+        opacity: 1;
+        filter: brightness(3);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+        filter: brightness(3);
+    }
+}
+
+@keyframes fundo {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+@keyframes subir {
+  to { transform: translateY(-280px); }
+}
+
+@keyframes arco-iris {
+  to { filter: hue-rotate(360deg); }
+}
+
+/* respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+
+    body,
+    body::before {
+        animation: none;
+    }
+}
